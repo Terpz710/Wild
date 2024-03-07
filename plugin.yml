@@ -1,0 +1,11 @@
+name: Wild
+version: 1.0.0
+author: Terpz710
+api: 5.0.0
+main: Terpz710\Wild\Loader
+description: Allows the player to teleport randomly in a specifed world.
+
+permissions:
+  wild.cmd:
+    description: Wild command permission.
+    default: true

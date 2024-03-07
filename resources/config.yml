@@ -1,0 +1,8 @@
+# Made by Terpz710 :p
+
+# Minimum and maximum coordinates for teleportation
+MinCoord: -1000
+MaxCoord: 1000
+
+# Name of the world where players can teleport to
+WildWorld: "wild_world"
