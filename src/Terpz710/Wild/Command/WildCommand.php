@@ -40,16 +40,20 @@ class WildCommand extends Command
             if ($world !== null) {
                 $randomX = mt_rand($min, $max);
                 $randomZ = mt_rand($min, $max);
-                if (!$world->isChunkLoaded($randomX >> 4, $randomZ >> 4)) {
-                    $world->loadChunk($randomX >> 4, $randomZ >> 4);
-                }
 
                 if ($world->isChunkLoaded($randomX >> 4, $randomZ >> 4)) {
                     $spawnPosition = new Position($randomX, $world->getHighestBlockAt($randomX, $randomZ) + 1, $randomZ, $world);
                     $sender->teleport($spawnPosition);
                     $sender->sendMessage("[" . TF::AQUA . "Wilderness" . TF::RESET . "] " . TF::YELLOW . " You have been teleported to a random location!");
                 } else {
-                    $sender->sendMessage(TF::RED . "Error: Unable to load the chunk at coordinates: §c{$randomX}, {$randomZ}");
+                    $world->loadChunk($randomX >> 4, $randomZ >> 4);
+                    if ($world->isChunkLoaded($randomX >> 4, $randomZ >> 4)) {
+                        $spawnPosition = new Position($randomX, $world->getHighestBlockAt($randomX, $randomZ) + 1, $randomZ, $world);
+                        $sender->teleport($spawnPosition);
+                        $sender->sendMessage("[" . TF::AQUA . "Wilderness" . TF::RESET . "] " . TF::YELLOW . " You have been teleported to a random location!");
+                    } else {
+                        $sender->sendMessage(TF::RED . "Error: Unable to load the chunk at coordinates: §c{$randomX}, {$randomZ}");
+                    }
                 }
             } else {
                 $sender->sendMessage(TF::RED . "Error: Unable to load the specified world: §c{$worldName}");
