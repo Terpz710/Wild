@@ -9,7 +9,6 @@ use pocketmine\command\CommandSender;
 use pocketmine\world\Position;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat as TF;
 
 use Terpz710\Wild\Loader;
@@ -28,9 +27,9 @@ class WildCommand extends Command
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if ($sender instanceof Player) {
-            $min = (int) $this->plugin->config->get("MinCoord");
-            $max = (int) $this->plugin->config->get("MaxCoord");
-            $worldName = $this->plugin->config->get("WildWorld");
+            $min = (int) $this->plugin->getConfig()->get("MinCoord");
+            $max = (int) $this->plugin->getConfig()->get("MaxCoord");
+            $worldName = $this->plugin->getConfig()->get("WildWorld");
             $worldManager = $this->plugin->getServer()->getWorldManager();
 
             if (!$worldManager->isWorldLoaded($worldName)) {
